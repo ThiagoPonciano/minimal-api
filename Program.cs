@@ -1,10 +1,14 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Minimal_api.Dominio.Servicos;
+using Minimal_api.Infraestrutura.Interfaces;
 using MinimalApi.DTOs;
 using MinimalApi.Infraestrutura.Db;
 
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+
+builder.Services.AddScoped<iAdministradorServico, AdministradorServico>();
 
 builder.Services.AddDbContext<DbContexto>(options =>
 {
@@ -14,12 +18,13 @@ builder.Services.AddDbContext<DbContexto>(options =>
         ServerVersion.AutoDetect(connectionString)); // Usa auto-detect para a versão do MySQL
 });
 
+var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "Olá!");
 
-app.MapPost("/login", (LoginDTO loginDTO) =>
+app.MapPost("/login", ([FromBody]LoginDTO loginDTO, iAdministradorServico administradorServico) =>
 {
-    if (loginDTO.Email == "adm@teste.com" && loginDTO.Senha == "123456")
+    if (administradorServico.Login(loginDTO) != null)
         return Results.Ok("Login com sucesso");
     else
         return Results.Unauthorized();
