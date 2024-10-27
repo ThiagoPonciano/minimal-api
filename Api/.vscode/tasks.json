@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Api/Minimal-api.csproj",
+                "${workspaceFolder}/Minimal-api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary;ForceNoAlign"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Api/Minimal-api.csproj",
+                "${workspaceFolder}/Minimal-api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary;ForceNoAlign"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/Api/Minimal-api.csproj"
+                "${workspaceFolder}/Minimal-api.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
